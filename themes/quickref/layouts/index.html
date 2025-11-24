@@ -4,6 +4,23 @@
         <div class="header-content">
             <h1 class="header-title">{{ .Site.Title }}</h1>
             <p class="header-subtitle">{{ .Site.Params.description }}</p>
+            
+            <!-- Quick Navigation -->
+            <div class="quick-nav">
+                <h3 class="quick-nav-title">Quick Access</h3>
+                <div class="quick-nav-buttons">
+                    {{ range .Site.Taxonomies.categories }}
+                    {{ $categoryName := .Page.Title }}
+                    {{ $count := len .Pages }}
+                    <a href="#{{ $categoryName | urlize }}" class="quick-nav-btn" data-category="{{ $categoryName | urlize }}">
+                        <i class="fas fa-folder"></i>
+                        <span>{{ $categoryName | title }}</span>
+                        <span class="quick-nav-count">{{ $count }}</span>
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+            
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Search for cheatsheet..." id="searchInput">
                 <button class="search-btn" id="searchBtn">
@@ -19,10 +36,10 @@
         {{ range .Site.Taxonomies.categories }}
         {{ $category := . }}
         {{ $categoryName := .Page.Title }}
-        <div class="category-section" data-item-count="{{ len .Pages }}">
+        <div class="category-section" data-item-count="{{ len .Pages }}" id="{{ $categoryName | urlize }}">
             <div class="category-header">
                 <i class="fas fa-folder category-icon"></i>
-                <h2 class="category-title">{{ $categoryName }}</h2>
+                <h2 class="category-title">{{ $categoryName | title }}</h2>
                 <span class="category-count">{{ len .Pages }}</span>
             </div>
             <div class="cards-grid">
@@ -45,13 +62,6 @@
             </div>
         </div>
         {{ end }}
-    </div>
-    
-    <div class="text-center mt-5">
-        <div class="alert alert-info">
-            <h5><i class="fas fa-question-circle"></i> See something missing?</h5>
-            <p class="mb-0">Add a new markdown file to the <code>content/</code> directory organized by category to create new reference sheets.</p>
-        </div>
     </div>
 </div>
 {{ end }}

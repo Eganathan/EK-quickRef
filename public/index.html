@@ -34,6 +34,12 @@
                     Home
                 </a>
                 
+                <a class="nav-link" href="/links/" >
+                    
+                    
+                    Links
+                </a>
+                
                 <a class="nav-link" href="https://github.com/eganathan/quickref" target="_blank">
                     
                     <i class="fab fa-github"></i>
@@ -51,6 +57,55 @@
         <div class="header-content">
             <h1 class="header-title">QuickRef - Personal Developer Reference</h1>
             <p class="header-subtitle">Share quick reference and cheat sheets for developers</p>
+            
+            
+            <div class="quick-nav">
+                <h3 class="quick-nav-title">Quick Access</h3>
+                <div class="quick-nav-buttons">
+                    
+                    
+                    
+                    <a href="#ai" class="quick-nav-btn" data-category="ai">
+                        <i class="fas fa-folder"></i>
+                        <span>Ai</span>
+                        <span class="quick-nav-count">4</span>
+                    </a>
+                    
+                    
+                    
+                    <a href="#links" class="quick-nav-btn" data-category="links">
+                        <i class="fas fa-folder"></i>
+                        <span>Links</span>
+                        <span class="quick-nav-count">2</span>
+                    </a>
+                    
+                    
+                    
+                    <a href="#math" class="quick-nav-btn" data-category="math">
+                        <i class="fas fa-folder"></i>
+                        <span>Math</span>
+                        <span class="quick-nav-count">11</span>
+                    </a>
+                    
+                    
+                    
+                    <a href="#programming" class="quick-nav-btn" data-category="programming">
+                        <i class="fas fa-folder"></i>
+                        <span>Programming</span>
+                        <span class="quick-nav-count">7</span>
+                    </a>
+                    
+                    
+                    
+                    <a href="#tools" class="quick-nav-btn" data-category="tools">
+                        <i class="fas fa-folder"></i>
+                        <span>Tools</span>
+                        <span class="quick-nav-count">12</span>
+                    </a>
+                    
+                </div>
+            </div>
+            
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Search for cheatsheet..." id="searchInput">
                 <button class="search-btn" id="searchBtn">
@@ -66,7 +121,7 @@
         
         
         
-        <div class="category-section" data-item-count="4">
+        <div class="category-section" data-item-count="4" id="ai">
             <div class="category-header">
                 <i class="fas fa-folder category-icon"></i>
                 <h2 class="category-title">Ai</h2>
@@ -155,7 +210,58 @@
         
         
         
-        <div class="category-section" data-item-count="11">
+        <div class="category-section" data-item-count="2" id="links">
+            <div class="category-header">
+                <i class="fas fa-folder category-icon"></i>
+                <h2 class="category-title">Links</h2>
+                <span class="category-count">2</span>
+            </div>
+            <div class="cards-grid">
+                
+                <a href="/links/android/" class="quickref-card">
+                    <div class="quickref-card-title">
+                        <i class="fas fa-file-code quickref-card-icon"></i>
+                        Android Development
+                    </div>
+                    <div class="quickref-card-description">
+                        Essential Android development links and quick references
+                    </div>
+                    <div class="quickref-tags">
+                        
+                        <span class="quickref-tag">android</span>
+                        
+                        <span class="quickref-tag">mobile</span>
+                        
+                        <span class="quickref-tag">development</span>
+                        
+                    </div>
+                </a>
+                
+                <a href="/links/web-development/" class="quickref-card">
+                    <div class="quickref-card-title">
+                        <i class="fas fa-file-code quickref-card-icon"></i>
+                        Web Development
+                    </div>
+                    <div class="quickref-card-description">
+                        Essential web development resources and quick references
+                    </div>
+                    <div class="quickref-tags">
+                        
+                        <span class="quickref-tag">web</span>
+                        
+                        <span class="quickref-tag">frontend</span>
+                        
+                        <span class="quickref-tag">backend</span>
+                        
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+        
+        
+        
+        <div class="category-section" data-item-count="11" id="math">
             <div class="category-header">
                 <i class="fas fa-folder category-icon"></i>
                 <h2 class="category-title">Math</h2>
@@ -377,7 +483,7 @@
         
         
         
-        <div class="category-section" data-item-count="7">
+        <div class="category-section" data-item-count="7" id="programming">
             <div class="category-header">
                 <i class="fas fa-folder category-icon"></i>
                 <h2 class="category-title">Programming</h2>
@@ -523,7 +629,7 @@
         
         
         
-        <div class="category-section" data-item-count="12">
+        <div class="category-section" data-item-count="12" id="tools">
             <div class="category-header">
                 <i class="fas fa-folder category-icon"></i>
                 <h2 class="category-title">Tools</h2>
@@ -762,13 +868,6 @@
             </div>
         </div>
         
-    </div>
-    
-    <div class="text-center mt-5">
-        <div class="alert alert-info">
-            <h5><i class="fas fa-question-circle"></i> See something missing?</h5>
-            <p class="mb-0">Add a new markdown file to the <code>content/</code> directory organized by category to create new reference sheets.</p>
-        </div>
     </div>
 </div>
 
