@@ -1,67 +1,35 @@
 {{ define "main" }}
-<div class="header-section">
-    <div class="container">
-        <div class="header-content">
-            <h1 class="header-title">{{ .Site.Title }}</h1>
-            <p class="header-subtitle">{{ .Site.Params.description }}</p>
-            
-            <!-- Quick Navigation -->
-            <div class="quick-nav">
-                <h3 class="quick-nav-title">Quick Access</h3>
-                <div class="quick-nav-buttons">
-                    {{ range .Site.Taxonomies.categories }}
-                    {{ $categoryName := .Page.Title }}
-                    {{ $count := len .Pages }}
-                    <a href="#{{ $categoryName | urlize }}" class="quick-nav-btn" data-category="{{ $categoryName | urlize }}">
-                        <i class="fas fa-folder"></i>
-                        <span>{{ $categoryName | title }}</span>
-                        <span class="quick-nav-count">{{ $count }}</span>
-                    </a>
-                    {{ end }}
-                </div>
-            </div>
-            
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search for cheatsheet..." id="searchInput">
-                <button class="search-btn" id="searchBtn">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
+<section class="hero">
+  <p class="eyebrow">The developer's reference shelf</p>
+  <h1>Less searching.<br><span class="gradient-text">More building.</span></h1>
+  <p class="hero-description">The commands, syntax, and ideas worth keeping close. A personal collection of cheatsheets for the work in front of you.</p>
+  <p class="hero-meta"><span>{{ len .Site.RegularPages }} references</span><span>{{ len .Site.Sections }} collections</span><span>Always a quick lookup away</span></p>
+</section>
+<div class="library-layout">
+  <aside class="collections panel">
+    <p class="rail-label">Collections</p>
+    <nav aria-label="Reference collections">
+      <a href="{{ "/" | relURL }}" aria-current="page"><span class="collection-symbol">⌘</span>All references<span class="count">{{ len .Site.RegularPages }}</span></a>
+      {{ range .Site.Sections.ByTitle }}
+      {{ $names := dict "ai" "AI & agents" "programming" "Languages" "tools" "Developer tools" "math" "Mathematics" "links" "Useful links" }}
+      <a href="{{ .RelPermalink }}"><span class="collection-symbol" aria-hidden="true">{{ if eq .Section "tools" }}&gt;_{{ else if eq .Section "programming" }}{ }{{ else if eq .Section "math" }}∑{{ else if eq .Section "ai" }}✳{{ else }}↗{{ end }}</span>{{ index $names .Section | default .Title }}<span class="count">{{ len .RegularPages }}</span></a>
+      {{ end }}
+    </nav>
+    <div class="rail-note"><span class="section-index">A little less to remember.</span><p>Pick a collection or search for exactly what you need.</p><a href="https://github.com/Eganathan/quickRef/tree/master/content">Suggest an improvement ↗</a></div>
+  </aside>
+  <div class="library-content">
+    <div class="library-toolbar" data-enhanced hidden>
+      <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input data-search type="search" aria-label="Search references" placeholder="Search titles, topics, or tags…" autocomplete="off"><kbd>/</kbd></label>
+      <p class="result-count" data-results aria-live="polite">{{ len .Site.RegularPages }} references</p>
     </div>
-</div>
-
-<div class="main-content">
-    <div class="category-grid" id="categories-container">
-        {{ range .Site.Taxonomies.categories }}
-        {{ $category := . }}
-        {{ $categoryName := .Page.Title }}
-        <div class="category-section" data-item-count="{{ len .Pages }}" id="{{ $categoryName | urlize }}">
-            <div class="category-header">
-                <i class="fas fa-folder category-icon"></i>
-                <h2 class="category-title">{{ $categoryName | title }}</h2>
-                <span class="category-count">{{ len .Pages }}</span>
-            </div>
-            <div class="cards-grid">
-                {{ range .Pages }}
-                <a href="{{ .RelPermalink }}" class="quickref-card">
-                    <div class="quickref-card-title">
-                        <i class="fas fa-file-code quickref-card-icon"></i>
-                        {{ .Title }}
-                    </div>
-                    <div class="quickref-card-description">
-                        {{ .Description | default .Summary | truncate 100 }}
-                    </div>
-                    <div class="quickref-tags">
-                        {{ range (first 3 .Params.tags) }}
-                        <span class="quickref-tag">{{ . }}</span>
-                        {{ end }}
-                    </div>
-                </a>
-                {{ end }}
-            </div>
-        </div>
-        {{ end }}
-    </div>
+    {{ range $index, $section := .Site.Sections.ByTitle }}
+    {{ $names := dict "ai" "AI & agents" "programming" "Languages" "tools" "Developer tools" "math" "Mathematics" "links" "Useful links" }}
+    <section class="reference-group" id="{{ .Section }}">
+      <div class="section-heading"><span class="section-index">{{ printf "%02d" (add $index 1) }}</span><h2>{{ index $names .Section | default .Title }}</h2><span class="count" data-group-count>{{ len .RegularPages }} references</span></div>
+      <div class="reference-grid">{{ range .RegularPages.ByTitle }}{{ partial "reference-card.html" . }}{{ end }}</div>
+    </section>
+    {{ end }}
+    <div class="empty-state" data-empty hidden><h2>No references found.</h2><p>Try a different title, topic, or tag.</p><button class="text-button" data-reset type="button">Clear search →</button></div>
+  </div>
 </div>
 {{ end }}

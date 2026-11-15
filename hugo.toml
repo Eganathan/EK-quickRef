@@ -1,26 +1,14 @@
 baseURL = "https://qref.eknath.dev"
 languageCode = "en-us"
-title = "QuickRef - Personal Developer Reference"
+title = "QuickRef"
 theme = "quickref"
 
 [params]
-  description = "Share quick reference and cheat sheets for developers"
-  author = "QuickRef Team"
+  description = "A personal collection of developer cheatsheets, commands, and useful references."
+  author = "Eknath"
+  siteid = "quickref"
+  repository = "quickRef"
   
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-  [[menu.main]]
-    name = "Links"
-    url = "/links/"
-    weight = 2
-  [[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/eganathan/quickref"
-    weight = 3
-
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

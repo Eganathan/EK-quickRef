@@ -1,0 +1,5 @@
+<a class="reference-card panel hover-card" href="{{ .RelPermalink }}" data-reference data-search-text="{{ .Title }} {{ .Description }} {{ delimit (.Params.tags | default slice) " " }}">
+  <div class="reference-card-heading"><h3>{{ .Title }}</h3><span aria-hidden="true">↗</span></div>
+  <p>{{ .Description | default (.Summary | plainify) | truncate 115 }}</p>
+  {{ with .Params.tags }}<div class="tag-list">{{ range first 3 . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+</a>

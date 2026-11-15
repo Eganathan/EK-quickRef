@@ -85,5 +85,5 @@ async function fetchData(url) {
 
 ## See Also
 
-- [JavaScript Programming](/programming/javascript)
-- [CSS Tools](/tools/css)
+- [Programming references](/programming/)
+- [Developer tools](/tools/)

@@ -1,62 +1,39 @@
+{{/* Generated from Command Center shared/site-theme. Run npm run theme:sync there. */}}
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.LanguageCode }}" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
-    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link href="{{ "css/styles.css" | relURL }}" rel="stylesheet">
-    
-    <!-- Hugo Search -->
-    {{ if .Site.Params.search }}
-    <link href="{{ "css/search.css" | relURL }}" rel="stylesheet">
-    {{ end }}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }} · Eknath</title>
+  <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <script>try{const t=localStorage.getItem('ek-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/ek-tokens.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/ek-theme.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+  {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">{{ end }}
+  <script src="{{ "js/ek-theme.js" | relURL }}" defer></script>
+  <script src="{{ "js/app.js" | relURL }}" defer></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="{{ .Site.BaseURL }}">
-                <i class="fas fa-code"></i> {{ .Site.Title }}
-            </a>
-            <div class="navbar-nav ms-auto d-flex align-items-center">
-                <button class="theme-toggle me-3" onclick="toggleTheme()" aria-label="Toggle theme">
-                    <i class="fas fa-sun" id="theme-icon"></i>
-                </button>
-                {{ range .Site.Menus.main }}
-                <a class="nav-link" href="{{ .URL }}" {{ if .Name | eq "GitHub" }}target="_blank"{{ end }}>
-                    {{ if .Name | eq "Home" }}<i class="fas fa-home"></i>{{ end }}
-                    {{ if .Name | eq "GitHub" }}<i class="fab fa-github"></i>{{ end }}
-                    {{ .Name }}
-                </a>
-                {{ end }}
-            </div>
-        </div>
-    </nav>
-
-    <main>
-        {{ block "main" . }}{{ end }}
-    </main>
-
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <p class="mb-0">&copy; {{ now.Year }} {{ .Site.Title }}. Built with <i class="fas fa-heart text-danger"></i> for developers.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="{{ "js/app.js" | relURL }}"></script>
-    
-    {{ if .Site.Params.search }}
-    <script src="{{ "js/search.js" | relURL }}"></script>
-    {{ end }}
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }} home"><span class="brand-mark" aria-hidden="true">ek<span>.</span></span><span>{{ .Site.Title }}<small>by Eknath</small></span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="https://eknath.dev/">Home</a>
+        <a href="https://md.eknath.dev/">Blog</a>
+        <a href="{{ if eq .Site.Params.siteid "quickref" }}{{ "/" | relURL }}{{ else }}https://qref.eknath.dev/{{ end }}" {{ if eq .Site.Params.siteid "quickref" }}aria-current="page"{{ end }}>QuickRef</a>
+        <a href="{{ if eq .Site.Params.siteid "projects" }}{{ "/" | relURL }}{{ else }}https://projects.eknath.dev/{{ end }}" {{ if eq .Site.Params.siteid "projects" }}aria-current="page"{{ end }}>Projects</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true"><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14A8.5 8.5 0 0 1 10 4a8.5 8.5 0 1 0 10 10Z"/></svg></button>
+    </div>
+  </header>
+  <main id="main" class="shell">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer shell"><p>© {{ now.Year }} Eknath<span class="footer-dot">/</span>{{ .Site.Title }}</p><div><a href="https://eknath.dev/">Around the web ↗</a><a href="https://github.com/Eganathan/{{ .Site.Params.repository }}">Source ↗</a></div></footer>
 </body>
 </html>

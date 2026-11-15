@@ -1,0 +1,7 @@
+{{ define "main" }}
+<a href="{{ "/" | relURL }}" class="back-link">← All references</a>
+<section class="hero list-hero"><p class="eyebrow">QuickRef collection</p><h1>{{ .Title }}</h1><p class="hero-description">{{ len .Pages }} {{ if eq .Kind "taxonomy" }}topics to explore.{{ else }}references, ready when you need them.{{ end }}</p></section>
+<div class="library-toolbar" data-enhanced hidden><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input data-search type="search" aria-label="Search this collection" placeholder="Search this collection…"><kbd>/</kbd></label><p class="result-count" data-results aria-live="polite"></p></div>
+<section class="reference-group"><div class="reference-grid">{{ range .Pages.ByTitle }}{{ partial "reference-card.html" . }}{{ end }}</div></section>
+<div class="empty-state" data-empty hidden><h2>No references found.</h2><p>Try a different title, topic, or tag.</p><button class="text-button" data-reset type="button">Clear search →</button></div>
+{{ end }}

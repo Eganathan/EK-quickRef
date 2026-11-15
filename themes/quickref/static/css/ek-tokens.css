@@ -1,0 +1,44 @@
+/* Generated from Command Center shared/site-theme. Run npm run theme:sync there. */
+:root {
+  --font-body:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --primary-color:var(--primary);
+  --primary-2:rgba(30,41,59,.8);
+  --secondary-color:#1e40af;
+  --background-color:var(--bg);
+  --text-color:var(--text);
+  --accent-color:var(--accent);
+  color-scheme:dark;
+  --bg:#0f172a;
+  --bg-end:#1c2331;
+  --panel:rgba(30,41,59,.65);
+  --panel-solid:#1e293b;
+  --text:#e2e8f0;
+  --muted:#a6b4c8;
+  --accent:#60a5fa;
+  --primary:#3b82f6;
+  --border:rgba(255,255,255,.1);
+  --soft:rgba(96,165,250,.08);
+  --code:#0b1220;
+  --shadow:0 12px 36px rgba(0,0,0,.14);
+  --green:#86efac;
+  --amber:#fcd34d;
+  --purple:#c4b5fd
+}
+:root[data-theme=light] {
+  color-scheme:light;
+  --bg:#f1f5fb;
+  --bg-end:#e8eef8;
+  --panel:rgba(255,255,255,.8);
+  --panel-solid:#fff;
+  --text:#17233a;
+  --muted:#526178;
+  --accent:#1d4ed8;
+  --primary:#2563eb;
+  --border:rgba(30,64,175,.15);
+  --soft:rgba(59,130,246,.07);
+  --code:#101a2c;
+  --shadow:0 12px 36px rgba(30,64,175,.06);
+  --green:#16703c;
+  --amber:#875600;
+  --purple:#6d28d9
+}
