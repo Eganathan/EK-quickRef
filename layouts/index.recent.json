@@ -1,0 +1,9 @@
+{{- /* Generated from Command Center shared/hugo/home.recent.json. */ -}}
+{{- $pages := .Site.RegularPages -}}
+{{- with .Site.Params.rssSections -}}{{- $pages = where $pages "Section" "in" . -}}{{- end -}}
+{{- $pages = where $pages "Layout" "not in" (slice "search" "archives") -}}
+{{- $items := slice -}}
+{{- range first 6 $pages.ByDate.Reverse -}}
+  {{- $items = $items | append (dict "title" .Title "url" .Permalink "description" (.Description | default (.Summary | plainify) | plainify | truncate 160) "date" (.Date.Format "2006-01-02") "section" .Section) -}}
+{{- end -}}
+{{- $items | jsonify -}}

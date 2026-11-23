@@ -1,6 +1,13 @@
 /* Generated from Command Center shared/site-theme. Run npm run theme:sync there. */
 (() => {
   const toggle = document.querySelector('.theme-toggle');
+  const adaptTheme = () => {
+    if (document.documentElement.dataset.themeAdapter === 'papermod') {
+      document.body.classList.toggle('dark', document.documentElement.dataset.theme !== 'light');
+      document.getElementById('main-content')?.setAttribute('tabindex', '-1');
+    }
+  };
+  adaptTheme();
   const updateToggle = () => {
     const dark = document.documentElement.dataset.theme !== 'light';
     toggle?.setAttribute('aria-pressed', String(dark));
@@ -11,6 +18,7 @@
     const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
     document.documentElement.dataset.theme = theme;
     try { localStorage.setItem('ek-theme', theme); } catch {}
+    adaptTheme();
     updateToggle();
   });
   document.addEventListener('keydown', event => {

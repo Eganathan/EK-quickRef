@@ -5,7 +5,7 @@ theme = "quickref"
 
 [params]
   description = "A personal collection of developer cheatsheets, commands, and useful references."
-  author = "Eknath"
+  author = "Eganathan R (Eknath)"
   siteid = "quickref"
   repository = "quickRef"
   
@@ -23,8 +23,14 @@ theme = "quickref"
   tag = "tags"
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "RECENT"]
   section = ["HTML", "RSS"]
 
 [services.rss]
   limit = -1
+
+[outputFormats.RECENT]
+  mediaType = "application/json"
+  baseName = "recent"
+  isPlainText = true
+  notAlternative = true

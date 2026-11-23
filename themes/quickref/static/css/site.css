@@ -211,3 +211,7 @@
   white-space:nowrap;
   flex-shrink:0
 }
+.collections { border-radius:10px;background:transparent;box-shadow:none; }
+.reference-card { border-radius:10px; }
+.reference-card-heading h3 { font-weight:700; }
+.rail-note a { font-size:11px; }

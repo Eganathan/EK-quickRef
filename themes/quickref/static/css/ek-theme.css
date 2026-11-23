@@ -9,7 +9,8 @@ html {
 body {
   margin:0;
   min-width:320px;
-  background:radial-gradient(ellipse at 80% 0,rgba(59,130,246,.1),transparent 48%),linear-gradient(135deg,var(--bg),var(--bg-end)) fixed;
+  background-image:var(--ek-page-background);
+  background-attachment:fixed;
   color:var(--text);
   font:400 15px/1.7 var(--font-body)
 }
@@ -729,3 +730,26 @@ kbd {
     margin-bottom:30px
   }
 }
+
+/* Keep the shared shell independent of theme-specific variable names. */
+.site-header,.site-footer { --primary:var(--ek-primary); }
+/* Paper, ink, deliberate type, and a restrained accent. */
+body { font-family:var(--ek-font-body); }
+h1,h2,h3,.brand { font-family:var(--ek-font-display); }
+.brand-mark { background:var(--ek-text);color:var(--ek-panel);border:0;border-radius:8px;box-shadow:none;font-weight:800;letter-spacing:-1.5px; }
+.brand-mark span { color:var(--ek-panel); }
+.brand small { font-family:var(--ek-font-body); }
+.site-nav a { font-size:13px;font-weight:500; }
+.theme-toggle { border-radius:50%;background:transparent; }
+.hero { padding:64px 0 42px; }
+.hero h1 { font-weight:800;letter-spacing:-.055em;line-height:1.12; }
+.gradient-text { background:none;-webkit-text-fill-color:currentColor;color:var(--ek-accent); }
+.eyebrow { letter-spacing:.13em;font-size:10px; }
+.panel { backdrop-filter:none;box-shadow:none;border-radius:12px; }
+.search-box { border-radius:8px;background:var(--ek-panel); }
+.filter-button { border-radius:6px; }
+.article-header { border-radius:12px; }
+.article-header h1 { font-weight:800; }
+.hover-card:hover { border-color:var(--ek-accent);box-shadow:none; }
+.prose pre { border-radius:8px; }
+@media(prefers-reduced-motion:no-preference) { .hover-card:hover { transform:translateY(-2px);border-color:var(--ek-accent);box-shadow:none; } }

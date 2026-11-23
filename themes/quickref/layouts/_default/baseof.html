@@ -1,17 +1,18 @@
 {{/* Generated from Command Center shared/site-theme. Run npm run theme:sync there. */}}
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" data-theme="dark">
+<html lang="{{ .Site.LanguageCode }}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }} · Eknath</title>
   <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
   <meta name="color-scheme" content="dark light">
   <link rel="canonical" href="{{ .Permalink }}">
   <script>try{const t=localStorage.getItem('ek-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch{}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/ek-tokens.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/ek-theme.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
@@ -21,20 +22,8 @@
   <script src="{{ "js/app.js" | relURL }}" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }} home"><span class="brand-mark" aria-hidden="true">ek<span>.</span></span><span>{{ .Site.Title }}<small>by Eknath</small></span></a>
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="https://eknath.dev/">Home</a>
-        <a href="https://md.eknath.dev/">Blog</a>
-        <a href="{{ if eq .Site.Params.siteid "quickref" }}{{ "/" | relURL }}{{ else }}https://qref.eknath.dev/{{ end }}" {{ if eq .Site.Params.siteid "quickref" }}aria-current="page"{{ end }}>QuickRef</a>
-        <a href="{{ if eq .Site.Params.siteid "projects" }}{{ "/" | relURL }}{{ else }}https://projects.eknath.dev/{{ end }}" {{ if eq .Site.Params.siteid "projects" }}aria-current="page"{{ end }}>Projects</a>
-      </nav>
-      <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true"><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14A8.5 8.5 0 0 1 10 4a8.5 8.5 0 1 0 10 10Z"/></svg></button>
-    </div>
-  </header>
+  {{ partial "ek-header.html" . }}
   <main id="main" class="shell">{{ block "main" . }}{{ end }}</main>
-  <footer class="site-footer shell"><p>© {{ now.Year }} Eknath<span class="footer-dot">/</span>{{ .Site.Title }}</p><div><a href="{{ "index.xml" | relURL }}">RSS</a><a href="https://eknath.dev/">Around the web ↗</a><a href="https://github.com/Eganathan/{{ .Site.Params.repository }}">Source ↗</a></div></footer>
+  {{ partial "ek-footer.html" . }}
 </body>
 </html>
