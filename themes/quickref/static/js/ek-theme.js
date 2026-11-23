@@ -14,10 +14,10 @@
     toggle?.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
   };
   updateToggle();
+  window.addEventListener('ek-theme-change', () => { adaptTheme(); updateToggle(); });
   toggle?.addEventListener('click', () => {
     const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-    document.documentElement.dataset.theme = theme;
-    try { localStorage.setItem('ek-theme', theme); } catch {}
+    window.EKTheme.save(theme);
     adaptTheme();
     updateToggle();
   });
