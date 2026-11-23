@@ -1,0 +1,48 @@
+{{- /* Generated from Command Center shared/hugo/rss.xml. Run npm run theme:sync there. */ -}}
+{{- $pages := .RegularPagesRecursive -}}
+{{- if .IsHome -}}
+  {{- $pages = .Site.RegularPages -}}
+  {{- with .Site.Params.rssSections -}}
+    {{- $pages = where $pages "Section" "in" . -}}
+  {{- end -}}
+{{- end -}}
+{{- $pages = where $pages "Layout" "not in" (slice "search" "archives") -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}{{- $pages = first $limit $pages -}}{{- end -}}
+{{- $base := urls.Parse .Site.BaseURL -}}
+{{- $origin := printf "%s://%s" $base.Scheme $base.Host -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ if .IsHome }}{{ .Site.Params.description | default .Site.Title }}{{ else }}{{ .Title }} updates from {{ .Site.Title }}{{ end }}</description>
+    <language>{{ .Site.LanguageCode }}</language>
+    {{- with .OutputFormats.Get "RSS" }}
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{- end }}
+    {{- with $pages }}
+    <lastBuildDate>{{ (index .ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    {{- range $pages }}
+    {{- $content := .Content -}}
+    {{- /* Feed readers need article-relative fragments and root-relative media to resolve outside the website. */ -}}
+    {{- $content = replaceRE `(href|src)="(/(?:[^/"][^"]*)?)"` (printf `${1}="%s${2}"` $origin) $content -}}
+    {{- $content = replace $content `href="#` (printf `href="%s#` .Permalink) -}}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      {{- if not .PublishDate.IsZero }}
+      <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- end }}
+      {{- range .Params.tags }}
+      <category>{{ . }}</category>
+      {{- end }}
+      <description>{{ .Description | default (.Summary | plainify) | htmlEscape | safeHTML }}</description>
+      <content:encoded>{{ printf "<![CDATA[%s]]>" (replace $content "]]>" "]]]]><![CDATA[>") | safeHTML }}</content:encoded>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

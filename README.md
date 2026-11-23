@@ -27,3 +27,9 @@ Generated files are committed here so standalone Hugo builds do not require the 
 The root `css/`, `js/`, `pages/`, and structure generators are an older static prototype, outside the active Hugo theme. They are retained for reference.
 
 Some older `public/` output is tracked. Use memory rendering for previews and a temporary `--destination` for validation builds to avoid unrelated generated diffs.
+
+## RSS feeds
+
+`/index.xml` contains all published entries; section feeds are available at `/<section>/index.xml`. Complete rendered content is included in `content:encoded`, with summaries retained for readers that prefer them. Set `services.rss.limit` to a positive item count to limit feeds; `-1` keeps all entries. RSS links are available in the footer and feed discovery metadata.
+
+`layouts/_default/rss.xml` is generated from Command Center's `shared/hugo/rss.xml`; edit the parent source and run `npm run theme:sync`. Keep this generated override committed so independent builds work. Existing JSON/search outputs and term feeds remain available.

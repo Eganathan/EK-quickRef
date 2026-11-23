@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="{{ "css/ek-tokens.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/ek-theme.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
-  {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">{{ end }}
+  {{ $feed := .OutputFormats.Get "RSS" | default (.Site.Home.OutputFormats.Get "RSS") }}
+  {{ with $feed }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}">{{ end }}
   <script src="{{ "js/ek-theme.js" | relURL }}" defer></script>
   <script src="{{ "js/app.js" | relURL }}" defer></script>
 </head>
@@ -34,6 +35,6 @@
     </div>
   </header>
   <main id="main" class="shell">{{ block "main" . }}{{ end }}</main>
-  <footer class="site-footer shell"><p>© {{ now.Year }} Eknath<span class="footer-dot">/</span>{{ .Site.Title }}</p><div><a href="https://eknath.dev/">Around the web ↗</a><a href="https://github.com/Eganathan/{{ .Site.Params.repository }}">Source ↗</a></div></footer>
+  <footer class="site-footer shell"><p>© {{ now.Year }} Eknath<span class="footer-dot">/</span>{{ .Site.Title }}</p><div><a href="{{ "index.xml" | relURL }}">RSS</a><a href="https://eknath.dev/">Around the web ↗</a><a href="https://github.com/Eganathan/{{ .Site.Params.repository }}">Source ↗</a></div></footer>
 </body>
 </html>

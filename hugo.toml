@@ -24,3 +24,7 @@ theme = "quickref"
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+
+[services.rss]
+  limit = -1
