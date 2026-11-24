@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ "css/ek-tokens.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/ek-theme.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/ek-header.css" | relURL }}?v=shared-header-1">
   {{ $feed := .OutputFormats.Get "RSS" | default (.Site.Home.OutputFormats.Get "RSS") }}
   {{ with $feed }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}">{{ end }}
   <script src="{{ "js/ek-theme.js" | relURL }}?v=shared-theme-1" defer></script>

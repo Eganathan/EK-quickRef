@@ -1,3 +1,4 @@
+enableRobotsTXT = true
 baseURL = "https://qref.eknath.dev"
 languageCode = "en-us"
 title = "QuickRef"
@@ -7,7 +8,7 @@ theme = "quickref"
   description = "A personal collection of developer cheatsheets, commands, and useful references."
   author = "Eganathan R (Eknath)"
   siteid = "quickref"
-  repository = "quickRef"
+  repository = "EK-quickRef"
   
 [markup]
   [markup.goldmark]
